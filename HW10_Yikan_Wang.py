@@ -75,7 +75,7 @@ class Summaries:
 
     def scan_majors(self):
         """scans majors.txt and populate it to a dictionary"""
-        path = "HW10/majors.txt"
+        path = "majors.txt"
         for i in file_reader(path, 3, '\t', True, 2):
             self.major_dict[i[0]] = [[], []]
         for i in file_reader(path, 3, '\t', True):
@@ -90,11 +90,11 @@ class Summaries:
     def scan_student_info(self):
         """scans students.txt and populate it to a dictionary"""
 
-        path = "HW10/students.txt"
+        path = "students.txt"
         for i in file_reader(path, 3, ';', True, 0):
             self.student_dict[i[0]] = [i[1], i[2], 0, 0, [], [], []]
 
-        path = "HW10/grades.txt"
+        path = "grades.txt"
         for i in file_reader(path, 4, '|', True):
             self.student_dict[i[0]][2] += self.grade_dict[i[2]]
             self.student_dict[i[0]][3] += 1
@@ -117,7 +117,7 @@ class Summaries:
     def scan_instructors(self):
         """scans instructors.txt and populate it to dictionary"""
 
-        path = "HW10/instructors.txt"
+        path = "instructors.txt"
         for i in file_reader(path, 3, '|', True):
             self.instructor_dict[i[0]] = [i[1]]
             self.instructor_dict[i[0]].append(i[2])
