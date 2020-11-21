@@ -3,6 +3,8 @@ Homework 10 test file
 Author: Yikan
 Test is HW10_Yikan_Wang reads&stores data as expected
 New added contaminated data included
+I under stand that I should keep width of lines under 59,
+but it is very difficult for a long test list in this file
 """
 
 import unittest
