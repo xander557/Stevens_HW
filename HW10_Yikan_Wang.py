@@ -17,12 +17,12 @@ from collections import defaultdict
 from logging import exception
 
 from prettytable import PrettyTable
-from Test_Student_Repository_Yikan_Wang import file_reader
+from Student_Repository_Yikan import file_reader
 
 
 def main():
     """populate data and prints"""
-    autoReader = summaries()
+    autoReader = Summaries()
     autoReader.print_summary()
 
 
@@ -52,7 +52,7 @@ def diff(list1, list2):
     return result
 
 
-class summaries:
+class Summaries:
     """ Field: dictionaries that stores data of students/grade
                     and instructors.
             Methods that populate those dictionaries.

@@ -9,7 +9,7 @@ import unittest
 from collections import defaultdict
 from typing import List, Iterator
 
-from HW10_Yikan_Wang import summaries
+from HW10_Yikan_Wang import Summaries
 
 
 class Summaries_Test(unittest.TestCase):
@@ -17,7 +17,7 @@ class Summaries_Test(unittest.TestCase):
 
     def test_summaries(self):
         """test if the class reads&stores data as expected"""
-        autoReader = summaries()
+        autoReader = Summaries()
         expected_stu = defaultdict(None, {
             '10103': ['Baldwin, C', 'SFEN', 13.75, 4, ['SSW 567', 'SSW 564', 'SSW 687', 'CS 501'],
                       ['SSW 540', 'SSW 555'], []],
