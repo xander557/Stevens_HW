@@ -7,8 +7,33 @@
 from datetime import datetime, timedelta
 import os
 from typing import Tuple, Iterator, List, Dict
+import sqlite3
 from prettytable import PrettyTable
 
+
+
+def student_grades_table_db(self, db_path):
+    DB_FILE = "HW11.db"
+    stevens_db = sqlite3.connect(DB_FILE)
+
+    print('SQL Student grade Summary')
+    query = """
+                SELECT  s.Name as Name, s.CWID as CWID, g.grade as Grade, i.name as Instructor_Name
+                From
+                    students s
+                    JOIN grades g
+                        ON s.CWID = g.StudentCWID
+                    JOIN instructors i
+                        ON g.InstructorCWID = i.CWID
+                ORDER BY s.Name
+            """
+
+    pt = PrettyTable(field_names=['Name', 'CWID', 'Grade', 'Instructor'])
+
+    for row in stevens_db.execute(query):
+        pt.add_row(row)
+
+    print(pt)
 
 def date_time() -> Tuple[datetime, datetime, int]:
     """Date arithmetics"""
@@ -46,8 +71,7 @@ def file_reader(path, fields, sep=',', header=False, keyRow=-1) -> Iterator[List
                     if len(list_strings) != fields or '' in list_strings:
                         raise ValueError
                     if keyRow != -1:
-                        if list_strings[keyRow] in keyContainer:
-                            raise ValueError
+
                         keyContainer.append(list_strings[keyRow])
                     if header:
                         header = False

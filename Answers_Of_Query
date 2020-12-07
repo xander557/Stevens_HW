@@ -1,0 +1,28 @@
+---This file has answers of the questions of queries----
+SELECT  s.name
+FROM students s
+WHERE CWID = '10115';
+
+SELECT s.major, count(*)
+FROM students s
+GROUP BY major;
+
+SELECT g.grade , count(*) AS cnt
+FROM  grades g
+GROUP BY grade LIMIT 1;
+
+SELECT  Name, CWID, count(CWID) as cnt
+From
+    students
+    JOIN grades ON
+    CWID = StudentCWID
+GROUP BY CWID;
+
+SELECT  s.Name as Name, s.CWID as CWID, g.grade as Grade, i.name as Instructor_Name
+From
+    students s
+    JOIN grades g
+        ON s.CWID = g.StudentCWID
+    JOIN instructors i
+        ON g.InstructorCWID = i.CWID
+ORDER BY s.Name
