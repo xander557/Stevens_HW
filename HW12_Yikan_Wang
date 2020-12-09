@@ -1,0 +1,45 @@
+"""
+    Author: Yikan Wang
+    This file uses python to integrate
+    database queries results and web pages
+
+"""
+import sqlite3
+from typing import Dict
+from flask import Flask, render_template
+
+DB_FILE = "HW11.db"
+
+app: Flask = Flask(__name__)
+
+
+@app.route('/sample')
+def template_demo() :
+    # query
+    query = """
+        SELECT 
+            s.Name, s.CWID, g.Course, g.Grade, i.Name
+        FROM
+            students s
+            JOIN grades g
+                ON s.CWID = g.StudentCWID
+            JOIN instructors i
+                ON g.InstructorCWID = i.CWID
+        ORDER BY s.Name"""
+    # Query the database
+    db: sqlite3.Connection = sqlite3.connect(DB_FILE)
+    data: Dict[str, str] = [{
+        'Name': name, 'CWID': cwid, 'Course': course,
+        'Grade': grade, 'Teacher': instructor}
+        for name, cwid, course, grade, instructor in
+        db.execute(query)]
+    db.close()
+
+    return render_template(
+        'student_courses.html',
+       title="Stevens Repository",
+       table_title="Student, Courses,Grade, and Instructor",
+       students=data)
+
+
+app.run(debug=True)
